@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!-- Fill in the ChangeMe values, 
+	then saveAs harvester-props.xml -->
+<properties>
+	<parameter name="KAFKA_SERVER_URL" value="localhostt" />
+
+	<parameter name="KAFKA_SERVER_PORT" value="9092" />
+
+	<!-- BaseURL includes the
+		api and annotations REST values -->
+	<parameter name="BaseURL" value="https://hypothes.is/api/search" />
+	
+	<parameter name="DatabaseName" value = "tagomizer_database" />
+	<parameter name="DatabaseSchema" value = "tq_tagomizer" />
+	
+	<!-- 
+		Must be determined from your hypothes.is account 
+		This is for single account harvesting -->
+	<parameter name="GroupId" value="changeME" />
+	
+	<!--
+		This is for a list of name/id pairs to harvest 
+	 -->
+	<list name="Groups">
+		<parameter name="somename" value="changeMe" />
+		<parameter name="anothername" value="changeMe" />	
+	</list>
+	
+	<!-- Must acquire a TOKEN from 
+		https://hypothes.is/account/developer -->
+	<parameter name="DeveloperToken" value="changeME" />
+
+	<!-- https://h.readthedocs.io/en/latest/api/realtime/ 
+		Deprecated, not going to happen -->
+	<parameter name="RealtimeURL" value="wss://hypothes.is/ws" />
+
+</properties>
+
