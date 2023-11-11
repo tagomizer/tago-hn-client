@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!-- tqks-hn-rssagent properties
+	-->
+
+<properties>
+
+	<parameter name="SpacyURL" value = "http://127.0.0.1:7777" />  <!-- CHANGE ME -->
+
+	<!--  <parameter name="OSServer" value="localhost" /> 
+	<parameter name="OSPort" value="9200" />
+
+	<parameter name="NumShards" value="1" /> 
+	<parameter name="NumReplicas]" value="0" /> 
+	
+	<parameter name="ClusterName" value="testcluster" /> 
+	<parameter name="ESPath" value="config/es/" /> 
+	
+	<parameter name="MappingPath" value="config/rss-hn-mappings.json" />
+	
+	<parameter name="ESCertPath" value="/users/jackpark/Downloads/elasticsearch-8.2.2/config/certs/http_ca.crt" />-->
+	
+	<parameter name="DatabaseName" value = "hntest" />
+	<parameter name="DatabaseSchema" value = "public" />
+	
+	
+	<!-- Multiple entries possible for clusters 
+	<list name="Clusters">
+		<parameter name="localhost" value="9200" /> 
+	</list>-->
+
+	<!-- Index must be lowercase
+	     name is the index; value is which mappings file to use 
+	     FOR NOW, TQElasticProvider supports just one INDEX -->
+	<list name="IndexNames">
+		<parameter name="stories" value = "rss-hn-mappings.json" />
+	</list>
+
+</properties>
+
