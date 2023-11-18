@@ -11,6 +11,10 @@ import org.topicquests.support.api.IResult;
 
 import com.google.gson.JsonObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.tinylog.Logger;
@@ -21,7 +25,9 @@ import org.tinylog.Logger;
  */
 public class HnHttpClient {
 	private HnClientEnvironment environment;
-	private SimpleHttpClient client;
+	private final int TIMEOUT = 10000;
+
+	//private SimpleHttpClient client;
 	private final String
 		UPDATES			= "https://hacker-news.firebaseio.com/v0/updates.json",
 		ITEM_1			= "https://hacker-news.firebaseio.com/v0/item/",
@@ -33,7 +39,7 @@ public class HnHttpClient {
 	 */
 	public HnHttpClient(HnClientEnvironment env) {
 		environment = env;
-		client = new SimpleHttpClient();
+		//client = new SimpleHttpClient();
 	}
 	
 	public IResult getMaxItemId() {
@@ -59,7 +65,7 @@ public class HnHttpClient {
 	 */
 	public IResult getNewStories() {
 		IResult result = new ResultPojo();
-		IResult r = client.get(NEWS, "");
+		IResult r = handle(NEWS);
 		if (r.hasError())
 			result.addErrorString("RC-3 "+r.getErrorString());
 		String x = (String)r.getResultObject();
@@ -74,7 +80,7 @@ public class HnHttpClient {
 	
 	public IResult getUpdates() {
 		IResult result = new ResultPojo();
-		IResult r = client.get(UPDATES, "");
+		IResult r = handle(UPDATES);
 		return result;
 	}
 
@@ -95,7 +101,7 @@ public class HnHttpClient {
 		int count = 0;
 		String x = null;
 		while (count++ < 4) { //try up to 3 times
-			r = client.get(ITEM_1+id+ITEM_2, "");
+			r = handle(ITEM_1+id+ITEM_2);
 			if (r.hasError())
 				result.addErrorString("RC-1 "+r.getErrorString());
 			x = (String)r.getResultObject();
@@ -112,5 +118,61 @@ public class HnHttpClient {
 		return result;
 	}
 
+	private IResult handle(String url) {
+		IResult result = new ResultPojo();
+		BufferedReader rd = null;
+		HttpURLConnection con = null;
+
+		try {
+			URL urx = new URL(url);
+			con = (HttpURLConnection) urx.openConnection();
+			con.setReadTimeout(TIMEOUT);
+			con.setRequestMethod("GET");
+			con.setDoInput(true);
+			con.setDoOutput(true);
+			con.connect();
+			int code = con.getResponseCode();
+			int counter = 0;
+			while (counter++ < 10) {
+				if (code != 200) {
+					TimeUnit.SECONDS.sleep(2);
+					code = con.getResponseCode();
+				}
+			}
+			if (code == 200) {
+				rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				StringBuilder buf = new StringBuilder();
+	
+				String line;
+				while ((line = rd.readLine()) != null) {
+					buf.append(line + '\n');
+				}
+	
+				result.setResultObject(buf.toString());
+			} else {
+				result.setResultObject(null);
+				result.addErrorString("Bad response "+code+" on "+url);
+			}
+		} catch (Exception var18) {
+			var18.printStackTrace();
+			result.addErrorString(var18.getMessage());
+		} finally {
+			try {
+				if (rd != null) {
+					rd.close();
+				}
+
+				if (con != null) {
+					con.disconnect();
+				}
+			} catch (Exception var17) {
+				var17.printStackTrace();
+				result.addErrorString(var17.getMessage());
+			}
+
+		}
+
+		return result;
+	}
 	
 }
