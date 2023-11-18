@@ -1,0 +1,3 @@
+psql hntest -f hn-schema.sql  to install
+create database hntest owner tq_admin;
+requires tq_admin with a password as defined in config/postgress-props.xml installed on db
