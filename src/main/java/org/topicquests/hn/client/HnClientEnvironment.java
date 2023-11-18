@@ -1,17 +1,19 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss;
+package org.topicquests.hn.client;
 
 import java.util.List;
 
-import org.topicquests.hn.rss.api.IDSL;
-import org.topicquests.hn.rss.nlp.DatabaseHarvester;
-import org.topicquests.hn.rss.nlp.NodeStudyThread;
-import org.topicquests.hn.rss.persist.PostgresDbDriver;
+import org.topicquests.hn.client.api.IBacksideDatabase;
+import org.topicquests.hn.client.api.IDSL;
+import org.topicquests.hn.client.nlp.DatabaseHarvester;
+import org.topicquests.hn.client.nlp.NodeStudyThread;
+import org.topicquests.hn.client.persist.PostgresDbDriver;
 import org.topicquests.pg.PostgresConnectionFactory;
 import org.topicquests.support.RootEnvironment;
-import org.topicquests.hn.rss.api.IBacksideDatabase;
 
 import net.minidev.json.JSONObject;
 import org.tinylog.Logger;
@@ -20,9 +22,9 @@ import org.tinylog.provider.ProviderRegistry;
  * @author jackpark
  *
  */
-public class RssEnvironment extends RootEnvironment {
-	private RssHnClient hnClient;
-	private RssHnAgent hnAgent;
+public class HnClientEnvironment extends RootEnvironment {
+	private HnHttpClient hnClient;
+	private HnAgent hnAgent;
 	private JSONObject clientMappings;
 	private IDSL dsl;
 	private PostgresConnectionFactory dbDriver = null;
@@ -31,15 +33,15 @@ public class RssEnvironment extends RootEnvironment {
 	private DatabaseHarvester nlp;
 	/**
 	 */
-	public RssEnvironment() {
+	public HnClientEnvironment() {
 		super("rss-config.xml");
 		String schemaName = getStringProperty("DatabaseSchema");
 		String dbName = getStringProperty("DatabaseName");
 		dbDriver = new PostgresConnectionFactory(dbName, schemaName);
 
-		hnClient = new RssHnClient(this);
+		hnClient = new HnHttpClient(this);
 		database = new PostgresDbDriver(this);
-		hnAgent = new RssHnAgent(this);
+		hnAgent = new HnAgent(this);
 		studyThread = new NodeStudyThread(this);
 		nlp = new DatabaseHarvester(this);
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -68,10 +70,10 @@ public class RssEnvironment extends RootEnvironment {
 		return dbDriver;
 	}
 
-	public RssHnAgent getHnAgent() {
+	public HnAgent getHnAgent() {
 		return hnAgent;
 	}
-	public RssHnClient getHnClient() {
+	public HnHttpClient getHnClient() {
 		return hnClient;
 	}
 	

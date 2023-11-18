@@ -1,7 +1,9 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss.nlp;
+package org.topicquests.hn.client.nlp;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,11 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.topicquests.hn.rss.RssEnvironment;
-import org.topicquests.hn.rss.api.IBacksideDatabase;
-import org.topicquests.hn.rss.api.ICommonModel;
-import org.topicquests.hn.rss.api.IThreadListener;
-import org.topicquests.hn.rss.spacy.SpacyHttpClient;
+import org.topicquests.hn.client.HnClientEnvironment;
+import org.topicquests.hn.client.api.IBacksideDatabase;
+import org.topicquests.hn.client.api.ICommonModel;
+import org.topicquests.hn.client.api.IThreadListener;
+import org.topicquests.hn.client.spacy.SpacyHttpClient;
 import org.topicquests.support.api.IResult;
 
 import com.google.gson.JsonArray;
@@ -26,7 +28,7 @@ import org.tinylog.Logger;
  *
  */
 public class NodeStudyThread {
-	private RssEnvironment environment;
+	private HnClientEnvironment environment;
 	private IBacksideDatabase database;
 
 	private SpacyHttpClient client;
@@ -37,7 +39,7 @@ public class NodeStudyThread {
 	/**
 	 * 
 	 */
-	public NodeStudyThread(RssEnvironment env) {
+	public NodeStudyThread(HnClientEnvironment env) {
 		environment = env;
 		database = environment.getDatabase();
 		client = new SpacyHttpClient(environment);

@@ -1,15 +1,17 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss;
+package org.topicquests.hn.client;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.topicquests.hn.rss.api.ExternalService;
-import org.topicquests.hn.rss.api.IConstants;
-import org.topicquests.hn.rss.api.ITreeNode;
-import org.topicquests.hn.rss.api.PostType;
+import org.topicquests.hn.client.api.ExternalService;
+import org.topicquests.hn.client.api.IConstants;
+import org.topicquests.hn.client.api.ITreeNode;
+import org.topicquests.hn.client.api.PostType;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

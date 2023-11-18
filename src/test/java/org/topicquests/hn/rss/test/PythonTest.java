@@ -1,9 +1,11 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
 package org.topicquests.hn.rss.test;
 
-import org.topicquests.hn.rss.spacy.SpacyHttpClient;
+import org.topicquests.hn.client.spacy.SpacyHttpClient;
 import org.topicquests.support.api.IResult;
 
 /**

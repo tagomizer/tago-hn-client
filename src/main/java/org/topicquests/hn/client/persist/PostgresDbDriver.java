@@ -1,7 +1,9 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss.persist;
+package org.topicquests.hn.client.persist;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,16 +14,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.topicquests.hn.rss.RssEnvironment;
-import org.topicquests.hn.rss.RssHnClient;
-import org.topicquests.hn.rss.TreeNode;
-import org.topicquests.hn.rss.api.ExternalService;
-import org.topicquests.hn.rss.api.IBacksideDatabase;
-import org.topicquests.hn.rss.api.ICommonModel;
-import org.topicquests.hn.rss.api.IQueries;
-import org.topicquests.hn.rss.api.ITreeNode;
-import org.topicquests.hn.rss.api.PostType;
-import org.topicquests.hn.rss.search.RssHnModel;
+import org.topicquests.hn.client.HnClientEnvironment;
+import org.topicquests.hn.client.HnHttpClient;
+import org.topicquests.hn.client.TreeNode;
+import org.topicquests.hn.client.api.ExternalService;
+import org.topicquests.hn.client.api.IBacksideDatabase;
+import org.topicquests.hn.client.api.ICommonModel;
+import org.topicquests.hn.client.api.IQueries;
+import org.topicquests.hn.client.api.ITreeNode;
+import org.topicquests.hn.client.api.PostType;
+import org.topicquests.hn.client.search.RssHnModel;
 import org.topicquests.pg.PostgresConnectionFactory;
 import org.topicquests.pg.api.IPostgresConnection;
 import org.topicquests.support.ResultPojo;
@@ -39,8 +41,8 @@ import org.tinylog.Logger;
  *
  */
 public class PostgresDbDriver implements IBacksideDatabase {
-	private RssEnvironment environment;
-	private RssHnClient hnClient;
+	private HnClientEnvironment environment;
+	private HnHttpClient hnClient;
 	private PostgresConnectionFactory database;
 	private LRUCache storyCache; //TODO what does cache use as key?
 	private final int clientCacheSize = 8192;
@@ -48,7 +50,7 @@ public class PostgresDbDriver implements IBacksideDatabase {
 	/**
 	 * 
 	 */
-	public PostgresDbDriver(RssEnvironment env) {
+	public PostgresDbDriver(HnClientEnvironment env) {
 		environment = env;
 		hnClient = environment.getHnClient();
 		database = environment.getPostgresFactory();

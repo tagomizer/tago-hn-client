@@ -1,9 +1,11 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss;
+package org.topicquests.hn.client;
 
-import org.topicquests.hn.rss.util.SimpleHttpClient;
+import org.topicquests.hn.client.util.SimpleHttpClient;
 import org.topicquests.support.ResultPojo;
 import org.topicquests.support.api.IResult;
 
@@ -17,8 +19,8 @@ import org.tinylog.Logger;
  * @author jackpark
  *
  */
-public class RssHnClient {
-	private RssEnvironment environment;
+public class HnHttpClient {
+	private HnClientEnvironment environment;
 	private SimpleHttpClient client;
 	private final String
 		UPDATES			= "https://hacker-news.firebaseio.com/v0/updates.json",
@@ -29,7 +31,7 @@ public class RssHnClient {
 	/**
 	 * 
 	 */
-	public RssHnClient(RssEnvironment env) {
+	public HnHttpClient(HnClientEnvironment env) {
 		environment = env;
 		client = new SimpleHttpClient();
 	}

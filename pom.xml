@@ -55,7 +55,7 @@
 				<configuration>
 		  		<archive>
 		    		<manifest>
-		      		<mainClass>org.topicquests.hn.rss.Main</mainClass>
+		      		<mainClass>org.topicquests.hn.client.Main</mainClass>
 		    		</manifest>
 		  		</archive>
 		  		<descriptorRefs>

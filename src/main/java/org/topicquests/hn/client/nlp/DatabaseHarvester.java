@@ -1,13 +1,15 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss.nlp;
+package org.topicquests.hn.client.nlp;
 
-import org.topicquests.hn.rss.RssEnvironment;
-import org.topicquests.hn.rss.api.IBacksideDatabase;
-import org.topicquests.hn.rss.api.ICommonModel;
-import org.topicquests.hn.rss.api.IThreadListener;
-import org.topicquests.hn.rss.search.RssHnModel;
+import org.topicquests.hn.client.HnClientEnvironment;
+import org.topicquests.hn.client.api.IBacksideDatabase;
+import org.topicquests.hn.client.api.ICommonModel;
+import org.topicquests.hn.client.api.IThreadListener;
+import org.topicquests.hn.client.search.RssHnModel;
 import org.topicquests.support.api.IResult;
 
 import com.google.gson.JsonArray;
@@ -19,7 +21,7 @@ import org.tinylog.Logger;
  * 
  */
 public class DatabaseHarvester implements IThreadListener {
-	private RssEnvironment environment;
+	private HnClientEnvironment environment;
 	private IBacksideDatabase database;
 	private NodeStudyThread studyThread;
 	private final int COUNT = 100; //number of hits to fetch at a time
@@ -28,7 +30,7 @@ public class DatabaseHarvester implements IThreadListener {
 	/**
 	 * 
 	 */
-	public DatabaseHarvester(RssEnvironment env) {
+	public DatabaseHarvester(HnClientEnvironment env) {
 		environment = env;
 		studyThread = environment.getStudyThread();
 		studyThread.setListener(this);

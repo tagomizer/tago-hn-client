@@ -1,18 +1,20 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss;
+package org.topicquests.hn.client;
 
 /**
  * @author jackpark
  *
  */
 public class Test {
-	protected RssEnvironment environment;
-	protected RssHnAgent hnAgent;
+	protected HnClientEnvironment environment;
+	protected HnAgent hnAgent;
 
 	public Test() {
-		environment = new RssEnvironment();
+		environment = new HnClientEnvironment();
 		hnAgent = environment.getHnAgent();
 		Runtime.getRuntime().addShutdownHook(new Thread()
 	    {

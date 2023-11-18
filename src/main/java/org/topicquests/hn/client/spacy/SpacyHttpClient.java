@@ -3,9 +3,9 @@
  *  This source code is available under the terms of the Affero General Public License v3.
  *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss.spacy;
+package org.topicquests.hn.client.spacy;
 
-import org.topicquests.hn.rss.RssEnvironment;
+import org.topicquests.hn.client.HnClientEnvironment;
 import org.topicquests.support.api.IResult;
 
 import net.minidev.json.JSONObject;
@@ -19,7 +19,7 @@ public class SpacyHttpClient extends HttpClient {
 	/**
 	 * @param env
 	 */
-	public SpacyHttpClient(RssEnvironment env) {
+	public SpacyHttpClient(HnClientEnvironment env) {
 		super(env);
 		SERVER_URL = environment.getStringProperty("SpacyURL");
 	}

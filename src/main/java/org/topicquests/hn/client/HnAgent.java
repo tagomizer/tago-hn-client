@@ -1,20 +1,22 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
-package org.topicquests.hn.rss;
+package org.topicquests.hn.client;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.topicquests.hn.rss.api.ExternalService;
-import org.topicquests.hn.rss.api.IBacksideDatabase;
-import org.topicquests.hn.rss.api.ICommonModel;
-import org.topicquests.hn.rss.api.IConstants;
-import org.topicquests.hn.rss.api.IDSL;
-import org.topicquests.hn.rss.api.PostType;
-import org.topicquests.hn.rss.search.RssHnModel;
+import org.topicquests.hn.client.api.ExternalService;
+import org.topicquests.hn.client.api.IBacksideDatabase;
+import org.topicquests.hn.client.api.ICommonModel;
+import org.topicquests.hn.client.api.IConstants;
+import org.topicquests.hn.client.api.IDSL;
+import org.topicquests.hn.client.api.PostType;
+import org.topicquests.hn.client.search.RssHnModel;
 import org.topicquests.support.ResultPojo;
 import org.topicquests.support.api.IResult;
 
@@ -27,9 +29,9 @@ import org.tinylog.Logger;
  * @author jackpark
  *
  */
-public class RssHnAgent {
-	private RssEnvironment environment;
-	private RssHnClient hnClient;
+public class HnAgent {
+	private HnClientEnvironment environment;
+	private HnHttpClient hnClient;
 	private IBacksideDatabase database;
 	private IDSL dsl;
 	//private boolean isRunning = true;
@@ -39,7 +41,7 @@ public class RssHnAgent {
 	/**
 	 * 
 	 */
-	public RssHnAgent(RssEnvironment env) {
+	public HnAgent(HnClientEnvironment env) {
 		environment = env;
 		hnClient = environment.getHnClient();
 		database = environment.getDatabase();

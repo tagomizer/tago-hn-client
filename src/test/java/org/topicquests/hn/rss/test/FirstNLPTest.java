@@ -1,12 +1,14 @@
-/**
- * 
+/*
+ * Copyright 2023 TopicQuests Foundation
+ *  This source code is available under the terms of the Affero General Public License v3.
+ *  Please see LICENSE.txt for full license terms, including the availability of proprietary exceptions.
  */
 package org.topicquests.hn.rss.test;
 
-import org.topicquests.hn.rss.api.ICommonModel;
-import org.topicquests.hn.rss.api.IThreadListener;
-import org.topicquests.hn.rss.nlp.NodeStudyThread;
-import org.topicquests.hn.rss.search.RssHnModel;
+import org.topicquests.hn.client.api.ICommonModel;
+import org.topicquests.hn.client.api.IThreadListener;
+import org.topicquests.hn.client.nlp.NodeStudyThread;
+import org.topicquests.hn.client.search.RssHnModel;
 import org.topicquests.support.api.IResult;
 
 import com.google.gson.JsonObject;
