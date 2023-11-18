@@ -44,7 +44,7 @@ public class HnHttpClient {
 	
 	public IResult getMaxItemId() {
 		IResult result = new ResultPojo();
-		IResult r = client.get(MAX_ITEM, "");
+		IResult r = handle(MAX_ITEM);
 		if (r.hasError())
 			result.addErrorString("RC-2 "+r.getErrorString());
 		String x = (String)r.getResultObject();
@@ -118,6 +118,11 @@ public class HnHttpClient {
 		return result;
 	}
 
+	/**
+	 * Perform HttpGET 
+	 * @param url
+	 * @return
+	 */
 	private IResult handle(String url) {
 		IResult result = new ResultPojo();
 		BufferedReader rd = null;
@@ -133,10 +138,15 @@ public class HnHttpClient {
 			con.connect();
 			int code = con.getResponseCode();
 			int counter = 0;
-			while (counter++ < 10) {
+			while (true) {
 				if (code != 200) {
 					TimeUnit.SECONDS.sleep(2);
 					code = con.getResponseCode();
+				} else
+					break;
+				if (counter++ >- 10) {
+					counter = 0;
+					System.out.println("HTTP Problem "+code);
 				}
 			}
 			if (code == 200) {
